@@ -33,7 +33,7 @@ When you've been making changes to a service, and want to kick the tyres
 integrating it with everything else:
 
 ```
-# Assuming you're working dir is in the service's repo
+# Assuming your working dir is in the service's repo
 sv restart ../runit-configs/sv/$service_name
 ```
 
