@@ -36,3 +36,8 @@ integrating it with everything else:
 # Assuming you're working dir is in the service's repo
 sv restart ../runit-configs/sv/$service_name
 ```
+
+## Further work
+
+* Enable/disable services by symlinking directories into sv, so that runsvdir
+  doesn't have to operate on everything in the repo.
