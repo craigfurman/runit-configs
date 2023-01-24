@@ -1,0 +1,11 @@
+# vi: ft=sh
+
+apps_base=${apps_base:-"$HOME/workspace/github.com/snyk"}
+
+sv_name="$(cd "$(dirname "$0")" && basename "$PWD")"
+
+# Most services have the same name as their directory, but when we want to run
+# multiple services from one dir, we break this model. Try to cd anyway without
+# bailing on error. The few control scripts that need custom dirs can cd for
+# themselves.
+cd "${apps_base}/${sv_name}" || true

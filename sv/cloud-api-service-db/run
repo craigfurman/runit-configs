@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "$(dirname "$0")/../../env"
+cd "${apps_base}/cloud-api-service"
+eval "$(grep export .envrc)"
+make db-start 2>&1
+sleep infinity

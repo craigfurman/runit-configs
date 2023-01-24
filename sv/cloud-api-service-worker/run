@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source "$(dirname "$0")/../../env"
+cd "${apps_base}/cloud-api-service"
+go run ./cmd/cloud-worker 2>&1
