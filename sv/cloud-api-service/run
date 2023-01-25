@@ -3,4 +3,4 @@ set -euo pipefail
 
 source "$(dirname "$0")/../../env"
 eval "$(grep export .envrc)"
-make run 2>&1
+go run ./cmd/cloud-api-service 2>&1

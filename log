@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-svlogd -tt .
+exec svlogd -tt .

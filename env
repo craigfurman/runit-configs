@@ -9,3 +9,13 @@ sv_name="$(cd "$(dirname "$0")" && basename "$PWD")"
 # bailing on error. The few control scripts that need custom dirs can cd for
 # themselves.
 cd "${apps_base}/${sv_name}" || true
+
+pgid="$(ps -o pgid= "$$")"
+kill_process_group() {
+  # Exclude self and runsv
+  # This is still quite dangerous: if the parent runsv was not spawned by
+  # `runsvdir -P`, so that it runs in a new process group, this can kill a lot
+  # more than we expect.
+  kill $(pgrep -g "$pgid" | grep -v "$$" | grep -v "$PPID" | tr '\n' ' ')
+}
+trap kill_process_group EXIT

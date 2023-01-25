@@ -7,8 +7,12 @@ managers.
 Start everything up:
 
 ```
-runsvdir ./sv
+runsvdir -P ./sv
 ```
+
+It's important that you pass `-P` to `runsvdir`, so that the process group clean
+up logic at service shutdown can actually be restricted to the relevant process
+group... you run this config at your own risk.
 
 Tail all logs:
 
@@ -23,7 +27,15 @@ sv status ./sv/*
 ```
 
 Don't interrupt that runsvdir process yet if you want all services to stop
-gracefully. To stop all services:
+gracefully. To stop all services and completely shut everything down, you can
+send SIGHUP to the runsvdir process. If you're only running one:
+
+```
+pkill -HUP runsvdir
+```
+
+To stop services in preparation for starting them again (runsv monitors will all
+keep running):
 
 ```
 sv stop ./sv/*
