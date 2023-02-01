@@ -4,6 +4,25 @@
 services at work. Runit is a simple process supervisor available in most package
 managers.
 
+**Before you start**: this repository is not intended to be a generic tool. It
+is intended as something to be customised. Read the `env` script, which is
+sourced by most (all?) control scripts. It makes an assumption about your
+environment: namely that all services are checked out in a directory
+`$apps_base`. If that is not the case, you likely can't get much value from this
+repo, without making it the case (e.g. via moving, or symlinks).
+
+Read each service's `run` (and `finish`, if present) script. As well as
+containing a startup command that may well make sense for you, e.g. `go run
+...`, or `npm run dev`, they also contain assumptions about my personal
+workflow! I use [asdf-vm](https://asdf-vm.com/), direnv, and asdf-direnv, so I'm
+sourcing `.envrc` files everywhere to set my tooling to the correct versions.
+This probably isn't what you are doing, and you will need to customise the
+scripts!
+
+Overall, please understand that this brings little to the party except a list of
+services and some suggestions for control scripts that are probably close to
+things that will work for you.
+
 Start everything up:
 
 ```
