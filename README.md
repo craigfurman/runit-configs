@@ -34,6 +34,9 @@ It's important that you pass `-P` to `runsvdir`, so that the process group clean
 up logic at service shutdown can actually be restricted to the relevant process
 group... you run this config at your own risk.
 
+**If you don't pass -P to `runsvdir`, each control script might kill a lot more
+processes than you might guess on shutdown.**
+
 Tail all logs:
 
 ```
@@ -73,3 +76,18 @@ sv restart ../runit-configs/sv/$service_name
 
 * Enable/disable services by symlinking directories into sv, so that runsvdir
   doesn't have to operate on everything in the repo.
+
+## Why are you doing that thing with process groups?
+
+The services being monitored here are not designed to be daemons, they are
+development commands that were designed to be run in the foreground, and fork
+arbitrarily many times. A typical command will call a make, which calls `go
+run`, which then becomes the parent of the service process itself. A developer
+will typically interrupt the foregrounded service process, which causes `go run`
+to exit once it's done waiting, and likewise with make. As a process supervisor,
+we have to get creative with how to kill our whole descendent tree.
+
+Ensuring we run each service in a new process group, and killing that whole
+process group, seemed good enough for a developer laptop flow. Something with
+pid namespaces and PR_SET_CHILD_SUBREAPER could probably be made to work on
+Linux, and would be extremely cool, but is a non-starter on Mac.
