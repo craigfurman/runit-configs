@@ -20,8 +20,9 @@ This probably isn't what you are doing, and you will need to customise the
 scripts!
 
 Overall, please understand that this brings little to the party except a list of
-services and some suggestions for control scripts that are probably close to
-things that will work for you.
+services, and some suggestions for control scripts that are probably _close_ to
+things that will work for developers of those services after some customisation,
+and a process group hack that I take no legal responsibility for.
 
 Start everything up:
 
