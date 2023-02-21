@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+cd "$(dirname "$0")"
+mkdir -p sv
+
 if [ -z "${1:-}" ]; then
   echo "usage: ./enable <service>"
   return 1
