@@ -24,6 +24,16 @@ services, and some suggestions for control scripts that are probably _close_ to
 things that will work for developers of those services after some customisation,
 and a process group hack that I take no legal responsibility for.
 
+Enable the services you want:
+
+```
+# Get service names from `ls ./available`
+./enable registry
+./enable app-ui
+```
+
+You only have to do that once.
+
 Start everything up:
 
 ```
@@ -72,10 +82,12 @@ integrating it with everything else:
 sv restart ../runit-configs/sv/$service_name
 ```
 
-## Further work
+To disable a service so that it doesn't start when you run `runsvdir`:
 
-* Enable/disable services by symlinking directories into sv, so that runsvdir
-  doesn't have to operate on everything in the repo.
+```
+# For example
+unlink ./sv/registry
+```
 
 ## Why are you doing that thing with process groups?
 

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ -z "${1:-}" ]; then
+  echo "usage: ./enable <service>"
+  return 1
+fi
+
+ln -s "../available/$1" ./sv
